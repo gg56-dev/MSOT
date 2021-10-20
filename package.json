@@ -1,0 +1,32 @@
+{
+  "name": "proxy3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "rm -f .openzeppelin/unknown-31337.json && hardhat test --timeout 1000000",
+    "coverage": "npx hardhat coverage --testfiles 'test/*.js' --solcoverjs .solcover.js"
+  },
+  "author": "Saqib",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^4.3.2",
+    "@openzeppelin/hardhat-upgrades": "^1.10.0",
+    "assert": "^2.0.0",
+    "axios": "^0.21.4",
+    "config": "^3.3.6",
+    "dotenv": "^10.0.0",
+    "hardhat": "^2.6.4",
+    "mocha": "^9.1.1",
+    "web3": "^1.5.3"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/test-helpers": "^0.5.13",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.7",
+    "solidity-coverage": "^0.7.17"
+  }
+}
