@@ -8,9 +8,7 @@ This project includes the following:
 
 - [x] MSOT (ERC20 Token)
 
-- [x] Scripts for deployment of contracts 
-
-- [x] Scripts for upgradation of contracts
+- [x] Scripts for deployment and upgradation of the smart contract
 
 - [x] Unit and Integration Tests
 
@@ -22,7 +20,7 @@ To get started with this project, follow these steps:
 
 2. Run `npm install` in the root of the repo
 
-3. Add a `secret.json` file in your root directory, where you'll store your wallet address, key and other sensitive data. The content should be similar to this: (keep the content as such for now, but fill the first 5 fields before running the deploy scripts)
+3. Add a `secret.json` file in your root directory, where you'll store your wallet address, key and other sensitive data. The content should be similar to this: 
 
     ```
     {
@@ -32,7 +30,7 @@ To get started with this project, follow these steps:
         "deployedMsotAddress": "<Once you deploy MSOT, it will return an address, paste that here>"
     }
     ```
-   > **Please Note:**  Deployed addresses are required because they are needed in upgradation, after the initial deployment. This file needs to be kept private.
+   > **Please Note:**  Deployed address is required because it is needed in upgradation, after the initial deployment. This file needs to be kept private.
    
 
 4. Run `npx hardhat compile` to get all the contracts compiled
@@ -43,7 +41,7 @@ To get started with this project, follow these steps:
 
 7. Run `npx hardhat run scripts/<script-name>.js` to run any of the scripts
 
-8. Run `npx hardhat run scripts/<script-name>.js --network rinkeby` to make transactions like, deployment and upgradation on the testnet. Try running these scripts, but do remember that your testnet urls are stored in secret.json file that we just created, so make sure to use the right url in the rinkeby network configuration in your hardhat.config.json file. If you are **deploying the MSOT**, the rinkeby configuration will look like this: 
+8. Run `npx hardhat run scripts/<script-name>.js --network rinkeby` to make transactions like, deployment and upgradation on the testnet. Try running these scripts, but do remember that your rinkeby configuration in hardhat.config.js file will look like this: 
 
     ```
     rinkeby: {
