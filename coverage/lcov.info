@@ -1,5 +1,5 @@
 TN:
-SF:/home/saqib/Saqib/Solidity/First Project/MSOT/contracts/libraries/safeMath.sol
+SF:/home/saqib/Saqib/Solidity/First Project/new/MSOT/contracts/libraries/safeMath.sol
 FN:5,sub
 FN:10,add
 FNF:2
@@ -17,7 +17,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/saqib/Saqib/Solidity/First Project/MSOT/contracts/Migrations.sol
+SF:/home/saqib/Saqib/Solidity/First Project/new/MSOT/contracts/Migrations.sol
 FN:8,restricted
 FN:16,setCompleted
 FNF:2
@@ -35,7 +35,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:/home/saqib/Saqib/Solidity/First Project/MSOT/contracts/MSOT.sol
+SF:/home/saqib/Saqib/Solidity/First Project/new/MSOT/contracts/MSOT.sol
 FN:25,initialize
 FN:37,_authorizeUpgrade
 FN:39,checkHalted
@@ -142,7 +142,7 @@ BRF:24
 BRH:21
 end_of_record
 TN:
-SF:/home/saqib/Saqib/Solidity/First Project/MSOT/contracts/tests/mockMSOT.sol
+SF:/home/saqib/Saqib/Solidity/First Project/new/MSOT/contracts/tests/mockMSOT.sol
 FN:7,version
 FNF:1
 FNH:1

@@ -78,7 +78,7 @@ it('should not transfer the tokens if the amount is greater than total supply', 
 
     this.Msot = await ethers.getContractFactory('MSOT');
     this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    await assert.rejects(() => this.msot_proxy.transferFrom(this.accounts[0].address, this.accounts[1].address , 5000000));
+    await assert.rejects(() => this.msot_proxy.transferFrom(this.accounts[0].address, this.accounts[1].address , 18000000000));
 
 })
 

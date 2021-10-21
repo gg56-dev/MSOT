@@ -10,7 +10,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 contract MSOT is Initializable, ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
     using SafeMath for uint256;
 
-    uint256 public constant _totalSupply = 12 * (10 ** 5);
+    uint256 public constant _totalSupply = 18 * (10 ** 8);
 
     bool public isPayable;
     bool public isHalted;
