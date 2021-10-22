@@ -1,8 +1,9 @@
 require('mocha')
 const assert = require('assert');
 const hre = require('hardhat');
-const { default: Web3 } = require('web3');
-const web3 = require('web3')
+Web3 = require("web3");
+web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
 
 before('deploy', async function (){
     this.MsotV1 = await ethers.getContractFactory('MSOT');
@@ -35,18 +36,6 @@ it('deploys the proxy and the upgrade on the same address', async function(){
     console.log("The Addresses: ");
     console.log("initial MSOT Address: " + this.proxy.address);
     console.log("Upgrade MSOT Address: " + this.upgraded_MSOT.address)
-})
-
-it('should set the allowance correctly', async function(){
-
-    this.Msot = await ethers.getContractFactory('MSOT');
-    this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    console.log(this.msot_proxy.address)
-    await this.msot_proxy.approve(this.accounts[0].address, 200)
-    await this.msot_proxy.transferFrom(this.accounts[0].address,this.accounts[1].address , 1200);
-    await assert.rejects(async () => await this.msot_proxy.transferFrom(this.accounts[1].address, this.accounts[0].address , 1200));
-    await this.msot_proxy.approve(this.accounts[1].address, 100)
-    await assert.rejects(async () => await this.msot_proxy.transferFrom(this.accounts[1].address, this.accounts[0].address , 90));
 })
 
 it('should transfer the tokens correctly using transferFrom function', async function(){
@@ -106,61 +95,40 @@ it('should not transfer the tokens if the amount is greater than the balance', a
 
 })
 
-it('should set the flags correctly', async function(){
+it('should correctly burn 100 MSOT tokens', async function(){
 
     this.Msot = await ethers.getContractFactory('MSOT');
     this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    await this.msot_proxy.setIsPayable(true);
-    await this.msot_proxy.sendFeeCurrency(this.accounts[1].address, 0)
-    await this.msot_proxy.setHalted(true);
-    await this.msot_proxy.setLock(this.accounts[0].address,true);
-    await this.msot_proxy.increaseAllowance(this.accounts[0].address, 500);
-    await assert.rejects(async () => await this.msot_proxy.transfer(this.accounts[1].address , 50));
-    await this.msot_proxy.transferAuthorizedCaller(this.accounts[1].address);
+    const supplyBefore = await this.msot_proxy.totalSupply();
+    await this.msot_proxy.burn(this.accounts[0].address, 100);
+    const supplyAfter = await this.msot_proxy.totalSupply();
+    await assert.equal(web3.utils.toNumber(supplyBefore), web3.utils.toNumber(supplyAfter) + 100)
 
 })
 
-it('should not transfer amount if lock is set for a particular account', async function(){
+it('should not burn more than the total supply of MSOT tokens', async function(){
 
     this.Msot = await ethers.getContractFactory('MSOT');
     this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    await this.msot_proxy.setIsPayable(true);
-    await this.msot_proxy.sendFeeCurrency(this.accounts[1].address, 0)
-    await this.msot_proxy.setHalted(false);
-    await this.msot_proxy.setLock(this.accounts[0].address,false);
-    await this.msot_proxy.setLock(this.accounts[1].address,true);
-    await this.msot_proxy.increaseAllowance(this.accounts[0].address, 500);
-    await this.msot_proxy.transferOwnership(this.accounts[1].address);
-    await assert.rejects(async () => await this.msot_proxy.transferFrom(this.accounts[0].address, this.accounts[1].address , 50));
-    await assert.rejects(async () => await this.msot_proxy.transfer(this.accounts[1].address, 50));
+    const supply = await this.msot_proxy.totalSupply();
+    await assert.rejects(async () => await this.msot_proxy.burn(this.accounts[0].address, supply+1));
 
 })
 
-it('should reject transferring Authorization to 0 address', async function(){
+it('should not burn negative number of MSOT tokens', async function(){
 
     this.Msot = await ethers.getContractFactory('MSOT');
     this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    assert.rejects(async () => await this.msot_proxy.transferAuthorizedCaller("0x0000000000000000000000000000000000000000"));
-    
+    await assert.rejects(async () => await this.msot_proxy.burn(this.accounts[0].address, -1));
+
 })
 
-it('should transfer amount if lock or halted flags are not set to true for a particular account', async function(){
-
+it("should mint 1800000000 tokens on deployment", async function(){
     this.Msot = await ethers.getContractFactory('MSOT');
     this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    await this.msot_proxy.setIsPayable(false);
-    await assert.rejects(async () => await this.msot_proxy.sendFeeCurrency(this.accounts[1].address, 0))
-    await this.msot_proxy.setHalted(false);
-    await this.msot_proxy.setLock(this.accounts[0].address,false);
-    await this.msot_proxy.setLock(this.accounts[1].address,false);
-    await this.msot_proxy.increaseAllowance(this.accounts[0].address, 500);
-    await this.msot_proxy.transferOwnership(this.accounts[1].address);
-    await assert.doesNotReject(async () => await this.msot_proxy.transferFrom(this.accounts[0].address, this.accounts[1].address , 50));
-    await assert.doesNotReject(async () => await this.msot_proxy.transfer(this.accounts[0].address , 50));
-    await assert.rejects(async () => await this.msot_proxy.setHalted(true))
-
+    const initialMinting = await this.msot_proxy.totalSupply();
+    assert.equal(web3.utils.toNumber(initialMinting), 1800000000 );
 })
-
 
 
 
