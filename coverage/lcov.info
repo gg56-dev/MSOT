@@ -18,18 +18,18 @@ BRH:1
 end_of_record
 TN:
 SF:/home/saqib/Saqib/Solidity/First Project/new/MSOT/contracts/MSOT.sol
-FN:13,initialize
-FN:20,_authorizeUpgrade
-FN:22,burn
+FN:14,initialize
+FN:21,_authorizeUpgrade
+FN:23,burn
 FNF:3
 FNH:3
 FNDA:24,initialize
 FNDA:2,_authorizeUpgrade
 FNDA:1,burn
-DA:14,24
 DA:15,24
 DA:16,24
-DA:23,1
+DA:17,24
+DA:24,1
 LF:4
 LH:4
 BRF:0

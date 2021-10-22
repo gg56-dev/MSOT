@@ -95,17 +95,6 @@ it('should not transfer the tokens if the amount is greater than the balance', a
 
 })
 
-it('should correctly burn 100 MSOT tokens', async function(){
-
-    this.Msot = await ethers.getContractFactory('MSOT');
-    this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    const supplyBefore = await this.msot_proxy.totalSupply();
-    await this.msot_proxy.burn(this.accounts[0].address, 100);
-    const supplyAfter = await this.msot_proxy.totalSupply();
-    await assert.equal(web3.utils.toNumber(supplyBefore), web3.utils.toNumber(supplyAfter) + 100)
-
-})
-
 it('should not burn more than the total supply of MSOT tokens', async function(){
 
     this.Msot = await ethers.getContractFactory('MSOT');
@@ -123,12 +112,6 @@ it('should not burn negative number of MSOT tokens', async function(){
 
 })
 
-it("should mint 1800000000 tokens on deployment", async function(){
-    this.Msot = await ethers.getContractFactory('MSOT');
-    this.msot_proxy = await hre.upgrades.deployProxy(this.Msot, {kind: 'uups'}); 
-    const initialMinting = await this.msot_proxy.totalSupply();
-    assert.equal(web3.utils.toNumber(initialMinting), 1800000000 );
-})
 
 
 
