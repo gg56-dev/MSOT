@@ -56,3 +56,11 @@ To get started with this project, follow these steps:
 
     `npx hardhat run scripts/UpgradeMsotProxy.js --network rinkeby`
 
+
+
+9. To verify your smart proxy contract visit `https://etherscan.io/proxyContractChecker` enter your proxy address to verify, If main contract is not verified you need to verify using make command.
+
+
+10. To verify smart main contract,please your contract main address and then  run command depending on your network `Make verify-mainnet-contract`, now go back and run reverify `https://etherscan.io/proxyContractChecker` this time your contract will be verified.
+
+

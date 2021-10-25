@@ -21,6 +21,9 @@ async function main() {
   const msot = await hre.upgrades.deployProxy(MSOT, {kind: 'uups'}); 
   await msot.deployed();
 
+  const marsImpl = await hre.upgrades.erc1967.getImplementationAddress(msot.address);
+  console.log(marsImpl)
+
   console.log("MSOT deployed to:", msot.address);
 }
 
