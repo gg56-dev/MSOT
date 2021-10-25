@@ -5,6 +5,8 @@ require("@nomiclabs/hardhat-ethers");
 require("@openzeppelin/hardhat-upgrades");
 require("solidity-coverage");
 let secret = require('./secret')
+require("@nomiclabs/hardhat-etherscan");
+
 var accounts;
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -23,18 +25,25 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
+  solidity: "0.8.7",
   
   networks: {
   
     ropsten: {
       url: secret.urlRopsten,
-      accounts: [secret.key],
+      accounts: [secret.key_rinkeby],
     },
     rinkeby: {
-      url: secret.MSOT_PROJECT_RINKEBY, //Infura url with projectId
-      accounts: [secret.key] // add the account that will deploy the contract (private key)
+      url: secret.rinkeby, //Infura url with projectId
+      accounts: [secret.key_rinkeby] // add the account that will deploy the contract (private key)
+    },
+    mainnet: {
+      url: secret.mainnet, //Infura url with projectId
+      accounts: [secret.key_mainnet]
+
     }
-     
+  },
+  etherscan: {
+    apiKey: secret.etherScanAPIKEY
   }
 };

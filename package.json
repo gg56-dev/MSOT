@@ -10,6 +10,7 @@
   "author": "Saqib",
   "license": "ISC",
   "dependencies": {
+    "@ethersproject/hardware-wallets": "^5.5.0",
     "@openzeppelin/contracts-upgradeable": "^4.3.2",
     "@openzeppelin/hardhat-upgrades": "^1.10.0",
     "assert": "^2.0.0",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.7",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/test-helpers": "^0.5.13",
     "chai": "^4.3.4",
