@@ -25,21 +25,17 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.7",
+  solidity: "0.8.2",
   
   networks: {
   
-    ropsten: {
-      url: secret.urlRopsten,
-      accounts: [secret.key_rinkeby],
-    },
     rinkeby: {
       url: secret.rinkeby, //Infura url with projectId
       accounts: [secret.key_rinkeby] // add the account that will deploy the contract (private key)
     },
     mainnet: {
       url: secret.mainnet, //Infura url with projectId
-      accounts: [secret.key_mainnet]
+      accounts: [secret.key_mainnet],
 
     }
   },
